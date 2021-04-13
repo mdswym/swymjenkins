@@ -19,7 +19,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - run: echo $BRANCH_NAME
         - name: Prints the current branch name
-          run: echo "${GITHUB_BRANCH##*/}"
+          run: echo "branch=${GITHUB_BRANCH##*/}" >> $GITHUB_ENV
           env:
             GITHUB_BRANCH: ${{ github.ref }}        
         - name: executing remote ssh commands using ssh key
@@ -28,4 +28,4 @@ jobs:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.KEY }}
-            script: HOST=$(hostname) && echo $HOST && ls && echo "${GITHUB_BRANCH##*/}"
+            script: HOST=$(hostname) && echo $HOST && ls && echo "$GITHUB_BRANCH" && echo "${{ env.branch }}"
