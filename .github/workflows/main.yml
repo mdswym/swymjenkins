@@ -22,10 +22,12 @@ jobs:
           run: echo "branch=${GITHUB_BRANCH##*/}" >> $GITHUB_ENV
           env: 
             GITHUB_BRANCH: ${{ github.ref }}
-        - name: executing remote ssh commands using ssh key
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.KEY }}
-            script: HOST=$(hostname) && echo $HOST && ls && echo "${{ env.branch }}"
+        - run: echo "${{ env.branch }}"
+        - run: curl http://10.11.1.13:8080
+#         - name: executing remote ssh commands using ssh key
+#           uses: appleboy/ssh-action@master
+#           with:
+#             host: ${{ secrets.HOST }}
+#             username: ${{ secrets.USERNAME }}
+#             key: ${{ secrets.KEY }}
+#             script: HOST=$(hostname) && echo $HOST && ls && echo "${{ env.branch }}"
