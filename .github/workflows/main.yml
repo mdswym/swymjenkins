@@ -18,12 +18,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - run: echo $BRANCH_NAME
-        - name: Extract branch name
-          shell: bash
-          run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-        - name: Test
-          run: echo "${BRANCH_NAME}"
-        
+        - name: Prints the current branch name
+          run: echo "${GITHUB_BRANCH##*/}"
+          env:
+            GITHUB_BRANCH: ${{ github.ref }}        
         - name: executing remote ssh commands using ssh key
           uses: appleboy/ssh-action@master
           with:
