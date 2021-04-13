@@ -20,6 +20,8 @@ jobs:
         - run: echo $BRANCH_NAME
         - name: Prints the current branch name
           run: echo "branch=${GITHUB_BRANCH##*/}" >> $GITHUB_ENV
+          env: 
+            GITHUB_BRANCH: ${{ github.ref }}
         - name: executing remote ssh commands using ssh key
           uses: appleboy/ssh-action@master
           with:
