@@ -28,4 +28,4 @@ jobs:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.KEY }}
-            script: HOST=$(hostname) && echo $HOST && ls && echo $BRANCH_NAME
+            script: HOST=$(hostname) && echo $HOST && ls && echo "${GITHUB_BRANCH##*/}"
