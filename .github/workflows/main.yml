@@ -17,10 +17,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - run: echo ${BRANCH_NAME}
+        
         - name: executing remote ssh commands using ssh key
           uses: appleboy/ssh-action@master
           with:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.KEY }}
-            script: HOST=$(hostname) && echo $HOST && ls
+            script: HOST=$(hostname) && echo $HOST && ls && echo ${BRANCH_NAME}
